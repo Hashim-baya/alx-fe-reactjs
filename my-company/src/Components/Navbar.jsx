@@ -3,24 +3,22 @@ import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
-    <div>
-        <nav style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <ul style={{ listStyleType: 'none', display: 'flex'}}>
-                <li style={{margin: '1em'}}>
-                    <Link  style={{textDecoration: 'none'}} to='/'>Home</Link>
-                </li>
-                <li style={{margin: '1em'}}>
-                    <Link style={{textDecoration: 'none'}} to='about'>About</Link>
-                </li>
-                <li style={{margin: '1em'}}>
-                    <Link style={{textDecoration: 'none'}} to='contact'>Contact</Link>
-                </li>
-                <li style={{margin: '1em'}}>
-                    <Link style={{textDecoration: 'none'}} to='services'>Services</Link>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    <nav>
+        <ul style={{ listStyleType: 'none', display: 'flex'}}>
+            <li>
+                <Link to="/">Home</Link>
+            </li>
+            <li>
+                <Link to="about">About</Link>
+            </li>
+            <li>
+                <Link to="services">Services</Link>
+            </li>
+            <li>
+                <Link to="contact">Contact</Link>
+            </li>
+        </ul>
+    </nav>
   )
 }
 
