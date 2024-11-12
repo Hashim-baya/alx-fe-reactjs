@@ -6,13 +6,14 @@ function Home() {
     <div style={{ 
       padding: '20px',
       backgroundColor: '#13961F28',
-      height: '100vh',
+      height: '80vh',
       }}>
          <h1 style={{ 
           textAlign: 'center', 
           color: 'rebeccapurple', 
           fontSize: '3rem', 
-          fontWeight: '900'}}
+          fontWeight: '900'
+      }}
           >
             Welcome to Our Company
           </h1>
