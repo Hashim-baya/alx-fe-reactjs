@@ -10,7 +10,7 @@ function Navbar() {
             alignItems: 'center', 
             height: '15vh', 
             minHeight: '100%', 
-            background: 'lightBlue',
+            backgroundColor: 'lightBlue',
             width: '100%',
             }}
         >
