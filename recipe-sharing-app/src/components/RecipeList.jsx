@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import useRecipeStore  from './recipeStore';
 import AddRecipeForm from './AddRecipeForm';
 
-const RecipeList = () => {
+const RecipeList = ({toggleFavorite}) => {
   const recipes = useRecipeStore((state) => state.recipes);
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
-
+  const favorites = useRecipeStore((state) => state.favorites);
 
   return (
     <div>
@@ -27,6 +27,16 @@ const RecipeList = () => {
       ) : (
         <p>No recipes found</p>
       )}
+        <h2>All Recipes</h2>
+      {recipes.map((recipe) => (
+        <div key={recipe.id} className="recipe-card">
+          <h3>{recipe.name}</h3>
+          <p>{recipe.description}</p>
+          <button onClick={() => toggleFavorite(recipe.id)}>
+            {favorites.includes(recipe.id) ? 'Unfavorite' : 'Favorite'}
+          </button>
+        </div>
+      ))}
       <AddRecipeForm />
     </div>
   );
