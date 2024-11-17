@@ -1,16 +1,27 @@
-import './App.css'
-import RecipeList from './components/RecipeList'
-import AddRecipeForm from './components/AddRecipeForm'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import RecipeList from './components/RecipeList';
+import AddRecipeForm from './components/AddRecipeForm';
+import RecipeDetails from './components/RecipeDetails';
 
 function App() {
-
-
   return (
-    <>
-      <RecipeList />
-      <AddRecipeForm />
-    </>
-  )
+    <Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/recipe/:id" element={<RecipeDetailsWrapper />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+// Wrapper to extract recipeId from URL
+const RecipeDetailsWrapper = () => {
+  const { id } = useParams();
+  return <RecipeDetails recipeId={parseInt(id, 10)} />;
+};
+
+export default App;
