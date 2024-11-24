@@ -18,15 +18,15 @@ function RegistrationForm() {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!formData.username) {
+        if (!username) {
           newErrors.username = 'Username is required';
         }
-        if (!formData.email) {
+        if (!email) {
           newErrors.email = 'Email is required';
         } 
-        if (!formData.password) {
+        if (!password) {
           newErrors.password = 'Password is required';
-        } else if (formData.password.length < 8) {
+        } else if (password.length < 8) {
           newErrors.password = 'Password must be at least 8 characters';
         }
     
