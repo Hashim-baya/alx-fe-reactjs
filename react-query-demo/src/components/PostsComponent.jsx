@@ -16,7 +16,13 @@ const PostsComponent = () => {
     isError,
     error,
     refetch,
-  } = useQuery("posts", fetchPosts);
+    isFetching,
+  } = useQuery("posts", fetchPosts, {
+    staleTime: 10000, // Data remains fresh for 10 seconds
+    cacheTime: 300000, // Cached data remains for 5 minutes
+    refetchOnWindowFocus: false, // Prevent refetching when the window regains focus
+    keepPreviousData: true, // Retain previous data while fetching new data
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -29,7 +35,9 @@ const PostsComponent = () => {
   return (
     <div>
       <h1>Posts</h1>
-      <button onClick={refetch}>Refetch Posts</button>
+      <button onClick={refetch} disabled={isFetching}>
+        {isFetching ? "Refreshing..." : "Refetch Posts"}
+      </button>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
