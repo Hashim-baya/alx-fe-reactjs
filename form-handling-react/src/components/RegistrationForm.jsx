@@ -15,7 +15,7 @@ function RegistrationForm() {
                 id='username' 
                 name='username' 
                 required 
-                value={formData.username} 
+                value={username} 
                 onChange={(e) => setFormData(e.target.value)}
             />
             
@@ -27,7 +27,7 @@ function RegistrationForm() {
                 name='email' 
                 id='email' 
                 required 
-                value={formData.email} 
+                value={email} 
                 onChange={(e) => setFormData(e.target.value)} 
             />
 
@@ -39,7 +39,7 @@ function RegistrationForm() {
                 name='password' 
                 id='password' 
                 required 
-                value={formData.password} 
+                value={password} 
                 onChange={(e) => setFormData(e.target.value)} 
             />
 
