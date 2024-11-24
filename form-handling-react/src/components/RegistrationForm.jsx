@@ -1,11 +1,39 @@
 import React, {useState} from 'react'
 
 function RegistrationForm() {
-    const [formData, setFormData] = useState('');
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+    });
 
+    const [errors, setErrors] = useState({});
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (validateForm()) {
+            console.log('Form Data Submitted:', formData);
+            alert('Form submitted successfully!');
+          }
     }
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.username) {
+          newErrors.username = 'Username is required';
+        }
+        if (!formData.email) {
+          newErrors.email = 'Email is required';
+        } 
+        if (!formData.password) {
+          newErrors.password = 'Password is required';
+        } else if (formData.password.length < 8) {
+          newErrors.password = 'Password must be at least 8 characters';
+        }
+    
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0; // Form is valid if there are no errors
+      };
+    
   return (
     <div>
         <form onSubmit={handleSubmit}>
