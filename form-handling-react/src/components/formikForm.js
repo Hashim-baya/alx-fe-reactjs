@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 const ValidationSchema = Yup.object({
     username: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
     email: Yup.string().email('Invalid Email address').required('Required'),
-    password: Yup.string().min(8, 'Must be atleast 8 characters').required('Required'),
+    password: Yup.string().required('Required').min(8, 'Must be atleast 8 characters'),
 
 
 });
