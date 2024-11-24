@@ -1,14 +1,14 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth"; // Import the custom hook for authentication
 
-const isAuthenticated = () => {
-    return localStorage.getItem("auth") === "true";
-  };
-  
 const ProtectedRoute = ({ children }) => {
-  if (!isAuthenticated()) {
+  const isAuthenticated = useAuth(); // Use the hook to check authentication status
+
+  if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }
+
   return children;
 };
 
