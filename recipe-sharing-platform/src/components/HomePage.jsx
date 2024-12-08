@@ -13,6 +13,12 @@ function HomePage() {
     })
   return (
     <div className='w-full flex  flex-col items-center justify-center md:flex-row  sm:flex-row '>
+         <Link
+          to="/add-recipe"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        >
+          Add New Recipe
+        </Link>
         {recipes.map((recipe) => (
             <div key={recipe.id} className='sm:w-3/4 min-h-64 border-gray-900 flex items-center  justify-center flex-col m-4  bg-slate-100 rounded-xl hover:shadow-md w-3/4 '>
                 <img className='w-full' src={recipe.image} alt={recipe.title} />
