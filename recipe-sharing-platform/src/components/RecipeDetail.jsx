@@ -1,62 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import data from '../data.json'; // Assuming data.json is in the src folder
 
 const RecipeDetail = () => {
-  const { id } = useParams(); // Get recipe ID from URL parameter
+  const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch recipe data based on the ID from the URL
-    fetch('/data.json')
-      .then((response) => response.json())
-      .then((data) => {
-        const foundRecipe = data.find((r) => r.id === parseInt(id));
-        setRecipe(foundRecipe);
-      })
-      .catch((error) => console.error('Error fetching recipe:', error));
+    const recipeData = data.find((recipe) => recipe.id === parseInt(id, 10));
+    if (recipeData) {
+      setRecipe(recipeData);
+    }
   }, [id]);
 
   if (!recipe) {
-    return <div>Loading...</div>;
+    return <p className="text-center text-gray-700">Recipe not found.</p>;
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <button
-        onClick={() => navigate('/')}
-        className="mb-6 text-blue-500 hover:underline"
-      >
-        Back to Recipe List
-      </button>
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex flex-col md:flex-row">
-          <img
-            src={recipe.image}
-            alt={recipe.title}
-            className="w-full md:w-1/2 h-60 object-cover rounded-md"
-          />
-          <div className="md:ml-6 mt-4 md:mt-0">
-            <h1 className="text-3xl font-bold text-gray-800">{recipe.title}</h1>
-            <p className="text-gray-600 mt-2">{recipe.summary}</p>
+    <div className="container mx-auto p-6 max-w-2xl">
+      <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
+      <img
+        src={recipe.image}
+        alt={recipe.title}
+        className="w-full h-auto rounded-lg mb-6"
+      />
+      <p className="text-gray-700 mb-4">{recipe.summary}</p>
 
-            <h2 className="text-2xl font-semibold mt-6">Ingredients</h2>
-            <ul className="list-disc list-inside text-gray-700 mt-2">
-              <li>Ingredient 1</li>
-              <li>Ingredient 2</li>
-              <li>Ingredient 3</li>
-              {/* Replace this with actual ingredients from the data */}
-            </ul>
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold mb-2">Ingredients</h2>
+        <ul className="list-disc list-inside text-gray-700">
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient}</li>
+          ))}
+        </ul>
+      </div>
 
-            <h2 className="text-2xl font-semibold mt-6">Cooking Instructions</h2>
-            <ol className="list-decimal list-inside text-gray-700 mt-2">
-              <li>Step 1</li>
-              <li>Step 2</li>
-              <li>Step 3</li>
-              {/* Replace this with actual cooking steps */}
-            </ol>
-          </div>
-        </div>
+      <div>
+        <h2 className="text-2xl font-semibold mb-2">Instructions</h2>
+        <ol className="list-decimal list-inside text-gray-700 space-y-2">
+          {recipe.instructions.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
+        </ol>
       </div>
     </div>
   );

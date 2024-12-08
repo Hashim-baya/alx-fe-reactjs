@@ -4,34 +4,35 @@ const AddRecipeForm = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(''); // Single error message for simplicity
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simple validation logic
+    // Basic validation
     if (!title || !ingredients || !steps) {
       setError('All fields are required.');
       return;
     }
 
-    const ingredientsArray = ingredients.split('\n').filter((item) => item.trim() !== '');
+    const ingredientsArray = ingredients.split('\n').filter((item) => item.trim());
     if (ingredientsArray.length < 2) {
       setError('Please include at least two ingredients.');
       return;
     }
 
-    setError('');
+    setError(''); // Clear error if validation passes
+
     const newRecipe = {
       id: Date.now(),
       title,
       ingredients: ingredientsArray,
-      steps: steps.split('\n').filter((step) => step.trim() !== ''),
+      steps: steps.split('\n').filter((step) => step.trim()),
     };
 
     console.log('New Recipe:', newRecipe);
 
-    // Clear form fields
+    // Clear form fields after successful submission
     setTitle('');
     setIngredients('');
     setSteps('');
@@ -41,10 +42,7 @@ const AddRecipeForm = () => {
   return (
     <div className="container mx-auto p-6 max-w-lg">
       <h1 className="text-2xl font-bold mb-6">Add a New Recipe</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md space-y-4"
-      >
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md space-y-4">
         {error && (
           <div className="bg-red-100 text-red-700 p-2 rounded">
             {error}
